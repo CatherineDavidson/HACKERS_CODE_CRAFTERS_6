@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Location Details</title>
+    </head>
+    <body>
+    
+        <h2>Location Details</h2>
+    
+        <form id="locationForm">
+            <label for="locationInput">Enter Location:</label>
+            <input type="text" id="locationInput" required><br>
+            <button type="button" onclick="getLocationDetails()">Get Details</button>
+        </form>
+    
+        <div id="result">
+            <!-- Display location details here -->
+        </div>
+    
+        <script>
+            function getLocationDetails() {
+                var address = document.getElementById('locationInput').value;
+                var resultContainer = document.getElementById('result');
+    
+                // Use your preferred geocoding API here
+                // This example uses the OpenStreetMap Nominatim API
+                var apiUrl = `https://nominatim.openstreetmap.org/search?q=${address}&format=json`;
+    
+                // Make a GET request to the API
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            var location = data[0];
+                            var details = `Latitude: ${location.lat}, Longitude: ${location.lon}<br>Address: ${location.display_name}`;
+                            resultContainer.innerHTML = details;
+                        } else {
+                            resultContainer.innerHTML = 'Error getting location details';
+                        }
+                    })
+                    .catch(error => {
+                        resultContainer.innerHTML = 'Error getting location details';
+                        console.error('Error:', error);
+                    });
+            }
+        </script>
+    
+    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Mapper</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <h2>Virtual Location</h2>
+    <form id="locationForm">
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" placeholder="Enter latitude" />
+        <br>
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" placeholder="Enter longitude" />
+        <br>
+        <button type="button" onclick="mapLocation()">Map Location</button>
+    </form>
+    <div id="map" style="height: 400px;"></div>
+
+    <script>
+        function mapLocation() {
+            var latitude = parseFloat(document.getElementById('latitude').value);
+            var longitude = parseFloat(document.getElementById('longitude').value);
+
+            if (isNaN(latitude) || isNaN(longitude)) {
+                alert('Please enter valid latitude and longitude.');
+                return;
+            }
+
+            // Use Leaflet to display the map
+            var map = L.map('map').setView([latitude, longitude], 10);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            L.marker([latitude, longitude]).addTo(map).bindPopup(`Location: ${latitude}, ${longitude}`).openPopup();
+        }
+    </script>
+</body>
+</html>
