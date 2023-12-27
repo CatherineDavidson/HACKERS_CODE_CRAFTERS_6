@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>User Sign Up</title>
+</head>
+<body>
+    <div id="signup-container">
+        <h1>User Sign Up</h1>
+        <form id="signup-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+
+            <label for="password">Create Password:</label>
+            <input type="password" id="password" required>
+
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" required>
+
+            <label for="full-name">Full Name:</label>
+            <input type="text" id="full-name" required>
+
+            <label for="family-members">Number of Family Members:</label>
+            <input type="number" id="family-members" required>
+
+            <label for="family-details">Family Members Details:</label>
+            <!-- You can repeat this section for each family member -->
+            <!-- For simplicity, I've included only one set of fields -->
+            <div class="family-member">
+                <input type="text" placeholder="Name" required>
+                <input type="number" placeholder="Age" required>
+                <input type="text" placeholder="Working/Studying" required>
+                <input type="text" placeholder="Gender" required>
+            </div>
+
+            <label for="aadhar-number">Aadhar Number:</label>
+            <input type="text" id="aadhar-number" required>
+
+            <label for="mobile-number">Mobile Number:</label>
+            <input type="tel" id="mobile-number" required>
+
+            <label for="alt-mobile-number">Alternative Mobile Number:</label>
+            <input type="tel" id="alt-mobile-number">
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" required>
+
+            <label for="camera-model">Camera Model:</label>
+            <input type="text" id="camera-model" required>
+
+            <label for="year-of-buying">Year of Buying:</label>
+            <input type="number" id="year-of-buying" required>
+
+            <label for="terms-and-conditions">
+                <input type="checkbox" id="terms-and-conditions" required>
+                I agree to the terms and conditions, including the ability to check camera recordings.
+            </label>
+
+            <label for="address">Address:</label>
+            <textarea id="address" required></textarea>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+        <div id="success-message" class="hidden">
+            <p>Submitted successfully! Thank you for joining.</p>
+            <p>Sign in <a href="signin.html">here</a>.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
